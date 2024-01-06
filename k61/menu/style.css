@@ -1,0 +1,422 @@
+body {
+    background-image: linear-gradient(to right, #313d4c, #343e48, #313d4c);
+    min-height: 450px;
+}
+
+#top {
+    top: 0px;
+    border-top: #333d48;
+    border-top-style: solid;
+    border-top-width: 3px;
+    left: 0.5%;
+    right: 0.5%;
+    position: fixed;
+    width: 99%;
+    height: 45px;
+    background-image: linear-gradient(to right, #29323e, #262d37, #29323e);
+    z-index: 10;
+    color: white;
+    text-align: center;
+    font-family: monospace;
+    font-size: 20px;
+    padding-top: 5px;
+    border-radius: 5px;
+    transition: top 0.3s;
+    opacity: 0.99;
+}
+
+#menu {
+    top: 60px;
+    left: 0.5%;
+    bottom: 1%;
+    position: fixed;
+    width: 50px;
+    background-image: linear-gradient(to bottom, #29323e, #262d37, #29323e);
+    z-index: 10;
+    font-family: monospace;
+    color: white;
+    font-size: 17px;
+    border-radius: 5px;
+    transition: top 0.3s;
+    opacity: 0.99;
+}
+
+.buttons {
+    width: 100%;
+    height: 50px;
+    background-color: #29303c;
+    border-radius: 6px;
+}
+
+.buttons:hover {
+    background-color: #404852;
+    cursor: pointer;
+}
+
+.sidegap {
+    width: 100%;
+    height: 50px;
+    background-color: #29303c;
+    border-radius: 6px;
+}
+
+.bar {
+
+    float: right;
+    background-color: white;
+    width: 44px;
+    height: 5px;
+    margin-top: 7px;
+    margin-right: 3px;
+    border-radius: 3px;
+}
+
+#gap {
+    float: right;
+    width: 12px;
+    height: 5px;
+    margin-top: 7px;
+    margin-right: 3px;
+    opacity: 0;
+}
+
+.info {
+    float: left;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+#home {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 50px;
+    height: 44px;
+    float: left;
+    margin: 0;
+    padding-top: 5px;
+    border-radius: 5px;
+}
+
+#home:hover {
+    background-color: #404852;
+    cursor: pointer;
+}
+
+#side_button {
+    padding-top: 8px;
+    padding-right: 8px;
+    float: right;
+}
+
+#login {
+    margin: auto;
+    width: 500px;
+    min-height: 200px;
+    background-color: white;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    font-family: monospace;
+    color: red;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+
+
+/* --------------------------------------- Treść strony --------------------------------------- */
+
+#strona {
+    margin: auto;
+    width: 880px;
+    background-color: #f2f2f2;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    color: black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 5px 5px 5px 5px;
+    display: grid;
+    grid-template-rows: auto;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-areas:
+        "header header header header"
+        "main main main main"
+        "main main main main"
+        "footer footer footer footer";
+    gap: 10px;
+    overflow-x: auto;
+    transition: 0.3s;
+}
+
+#strona a {
+    color: black;
+}
+
+#header {
+    background-color: green;
+    color: white;
+    align-self: center;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    grid-area: header;
+    display: grid;
+}
+
+#main {
+    grid-area: main;
+}
+
+#footer {
+    grid-area: footer;
+}
+
+.table {
+    color: black;
+}
+
+.choice {
+    float: left;
+    height: 150px;
+    width: 100%;
+    background-color: green;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 50px;
+    grid-area: main;
+    display: grid;
+    color: white;
+    transition: 0.3s;
+}
+
+.choice:hover {
+    opacity: 0.9;
+    height: 155px;
+    padding-top: 45px;
+    cursor: pointer;
+}
+
+.choice p {
+    font-size: 15px;
+}
+
+/* unvisited link */
+a:link {
+    color: white;
+}
+
+/* visited link */
+a:visited {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: white;
+}
+
+/* selected link */
+a:active {
+    color: white;
+}
+
+.table {
+    font-family: "Times New Roman", Times, serif;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    overflow: auto;
+    margin: 5px auto;
+    overflow-x: scroll;
+}
+
+.table1 {
+    font-family: "Times New Roman", Times, serif;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    overflow: auto;
+    margin: 5px auto;
+    overflow-x: scroll;
+}
+
+.table td,
+.table th {
+    border: 2px solid #000000;
+    padding: 3px 2px;
+}
+
+.table tbody td {
+    font-size: 13px;
+}
+
+.table tr:nth-child(even) {
+    background: #D0E4F5;
+}
+
+.table thead {
+    background: #0B6FA4;
+    border-bottom: 2px solid #000000;
+}
+
+.table thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #000000;
+}
+
+.table thead th:first-child {
+    border-left: none;
+}
+
+.table tfoot td {
+    font-size: 15px;
+    min-width: 100%;
+    width: auto;
+    border: 1px solid #000;
+    padding: 0px;
+    white-space: nowrap;
+}
+
+
+/* --------------------------------------- Strona logowania --------------------------------------- */
+
+#login {
+    margin: auto;
+    width: 500px;
+    min-height: 200px;
+    background-color: #f2f2f2;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    font-family: monospace;
+    color: red;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+    transition-delay: 1s;
+    transition: 0.5s;
+}
+
+#login input[type=submit] {
+    background-color: green;
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+#login input[type=submit]:hover {
+    background-color: #45a049;
+    box-sizing: border-box;
+}
+
+/* style inputs and link buttons */
+#login input,
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+#login input:hover,
+.btn:hover {
+    opacity: 1;
+}
+
+/* ---------------------------------------- Wyświetlanie w pionie --------------------------------------- */
+
+@media (max-width: 990px) {
+    #strona {
+        margin-top: 85px;
+        grid-template-areas:
+            "header header header"
+            "main main main"
+            "main main main"
+            "main main main"
+            "footer footer footer";
+        width: calc(100% - 100px);
+        margin-left: 95px;
+        min-width: 660px;
+    }
+
+    #home {
+        width: 90px;
+        height: 70px;
+    }
+
+    #top {
+        height: 70px;
+        font-size: xx-large;
+    }
+
+    #menu {
+        top: 85px;
+        width: 90px;
+        font-size: 20px;
+    }
+
+    .bar {
+        margin-right: 20px;
+        margin-top: 10px;
+    }
+
+    .buttons {
+        width: 100%;
+        height: 70px;
+        border-bottom-width: 1px;
+        border-radius: 6px;
+        align-items: center;
+    }
+
+    #side_button {
+        margin-right: 15px;
+    }
+
+    .sidegap {
+        height: 70px;
+    }
+
+    #login {
+        width: 80%;
+        min-height: 200px;
+        margin-top: 95px;
+    }
+
+    #login input,
+    .btn {
+        width: 100%;
+        padding: 20px;
+        font-size: x-large;
+    }
+}
+
+@media (max-width: 770px) {
+    #strona {
+        min-width: 440px;
+    }
+}
+
+@media (orientation: portrait) {
+    #strona {
+        grid-template-areas:
+            "header header"
+            "main main"
+            "main main"
+            "main main"
+            "footer footer";
+        min-width: 440px;
+    }
+}
