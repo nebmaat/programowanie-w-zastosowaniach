@@ -44,7 +44,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         echo "Błąd podczas sprawdzania nazwy użytkownika i roli do usunięcia: " . mysqli_error($conn);
     }
 } else {
-    echo "Brak prawidłowego parametru ID w adresie URL.";
+    
 }
 
 require_once '../../auth.php';
@@ -117,6 +117,8 @@ checkUserRole('admin');
                     <?php
                     include "../../db_conn.php";
                     $connect = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+                    mysqli_set_charset($connect, "utf8");
+                    
                     if (mysqli_connect_errno()) {
                         echo "Błąd połączenia z bazą";
                     }

@@ -128,6 +128,7 @@ if (isset($_POST['submit'])) {
                     <?php
                     include "../db_conn.php";
                     $connect = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+                    mysqli_set_charset($connect, "utf8");
                     if (mysqli_connect_errno()) {
                         echo "Błąd połączenia z bazą";
                     }
@@ -165,15 +166,15 @@ if (isset($_POST['submit'])) {
                     <tfoot>
                         <tr>
                             <td>
-                                <input type="text" name="id_u" placeholder="ID użytkownika" value="<?php echo $row['id_u'] ?>">
+                                <input type="text" name="id_u" placeholder="ID użytkownika" value="<?php echo $row['id_u'] ?>" required>
                             </td>
                             <td></td>
                             <td></td>
                             <td>
-                                <input type="text" name="mysz" placeholder="Mysz" value="<?php echo $row['mysz'] ?>">
+                                <input type="text" name="mysz" placeholder="Mysz" value="<?php echo $row['mysz'] ?>" required>
                             </td>
                             <td>
-                                <input type="text" name="klawiatura" placeholder="Klawiatura" value="<?php echo $row['klawiatura'] ?>">
+                                <input type="text" name="klawiatura" placeholder="Klawiatura" value="<?php echo $row['klawiatura'] ?>" required>
                             </td>
                         </tr>
                         <tr>

@@ -66,6 +66,7 @@ include "../db_conn.php";
                 <tbody>
                     <?php
                     $connect = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+                    mysqli_set_charset($connect, "utf8");
                     if (mysqli_connect_errno()) {
                         echo "Błąd połączenia z bazą";
                     }

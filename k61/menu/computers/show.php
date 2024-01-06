@@ -1,5 +1,5 @@
 ﻿<?
-require_once '../auth.php';
+require '../auth.php';
 checkUserRole('admin', "mode");
 
 error_reporting(E_ERROR | E_PARSE);
@@ -139,6 +139,7 @@ if (isset($_POST['submit'])) {
                     #NAWIĄZUJEMY POŁĄCZENIE Z BAZĄ DANYCH
                     include "../db_conn.php";
                     $connect = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+                    mysqli_set_charset($connect, "utf8");
                     if (mysqli_connect_errno()) {
                         echo "Błąd połączenia z bazą";
                     }
@@ -177,18 +178,18 @@ if (isset($_POST['submit'])) {
                     <tfoot>
                         <tr>
                             <td>
-                                <input type="text" name="id_u" placeholder="ID" value="<?php echo $row['id_u'] ?>">
+                                <input type="text" name="id_u" placeholder="ID" value="<?php echo $row['id_u'] ?>" required>
                             </td>
                             <td></td>
                             <td></td>
                             <td>
-                                <input type="text" name="producent" placeholder="producent" value="<?php echo $row['producent'] ?>">
+                                <input type="text" name="producent" placeholder="producent" value="<?php echo $row['producent'] ?>" required>
                             </td>
                             <td>
-                                <input type="text" name="model" placeholder="model" value="<?php echo $row['model'] ?>">
+                                <input type="text" name="model" placeholder="model" value="<?php echo $row['model'] ?>" required>
                             </td>
                             <td>
-                                <input type="text" name="nr_seryjny_k" placeholder="numer seryjny" value="<?php echo $row['nr_seryjny_k'] ?>">
+                                <input type="text" name="nr_seryjny_k" placeholder="numer seryjny" value="<?php echo $row['nr_seryjny_k'] ?>" required>
                             </td>
                         </tr>
                         <tr>

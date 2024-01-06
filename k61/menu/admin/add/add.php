@@ -5,21 +5,31 @@ checkUserRole('admin');
 include "../../db_conn.php";
 
 if (isset($_POST['submit'])) {
-    $u_name = mysqli_real_escape_string($conn, $_POST['u_name']);
+    $u_name = $_POST['u_name'];
     $u_password = password_hash($_POST['u_password'], PASSWORD_DEFAULT); // Haszowanie hasła
-    $u_role = mysqli_real_escape_string($conn, $_POST['u_role']);
+    $u_role = $_POST['u_role'];
 
     // Sprawdź, czy użytkownik o podanej nazwie już istnieje
-    $checkSql = "SELECT * FROM `users` WHERE `u_name` = '$u_name'";
-    $checkResult = mysqli_query($conn, $checkSql);
+    $checkSql = "SELECT * FROM `users` WHERE `u_name` = ?";
+    $stmt = mysqli_prepare($conn, $checkSql);
+    mysqli_stmt_bind_param($stmt, "s", $u_name);
+    mysqli_stmt_execute($stmt);
+    $checkResult = mysqli_stmt_get_result($stmt);
+
+    // Sprawdź, czy zapytanie było poprawne
+    if (!$checkResult) {
+        die("Błąd zapytania: " . mysqli_error($conn));
+    }
 
     if (mysqli_num_rows($checkResult) > 0) {
         // Użytkownik o podanej nazwie już istnieje
         echo "Użytkownik o podanej nazwie już istnieje.";
     } else {
         // Dodaj nowego użytkownika do bazy danych
-        $insertSql = "INSERT INTO `users` (`u_name`, `u_password`, `u_role`) VALUES ('$u_name', '$u_password', '$u_role')";
-        $insertResult = mysqli_query($conn, $insertSql);
+        $insertSql = "INSERT INTO `users` (`u_name`, `u_password`, `u_role`) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $insertSql);
+        mysqli_stmt_bind_param($stmt, "sss", $u_name, $u_password, $u_role);
+        $insertResult = mysqli_stmt_execute($stmt);
 
         if ($insertResult) {
             echo "Rekord został dodany poprawnie.";
@@ -28,12 +38,10 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
-require_once '../../auth.php';
-
-// Wywołaj funkcję sprawdzającą rolę
-checkUserRole('admin');
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,10 +99,10 @@ checkUserRole('admin');
                     </thead>
                     <tfoot>
                         <tr>
-                            <td><input type="text" name="u_name" placeholder="Login"></td>
-                            <td><input type="password" name="u_password" placeholder="Password"></td>
+                            <td><input type="text" name="u_name" placeholder="Login" required></td>
+                            <td><input type="password" name="u_password" placeholder="Password" required></td>
                             <td>
-                                <select name="u_role">
+                                <select name="u_role" required>
                                     <option value="admin">Admin</option>
                                     <option value="mode">Moderator</option>
                                     <option value="user">User</option>

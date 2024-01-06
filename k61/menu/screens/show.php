@@ -131,6 +131,7 @@ if (isset($_POST['submit'])) {
                     <?php
                     include "../db_conn.php";
                     $connect = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+                    mysqli_set_charset($connect, "utf8");
                     if (mysqli_connect_errno()) {
                         echo "Błąd połączenia z bazą";
                     }
@@ -168,18 +169,18 @@ if (isset($_POST['submit'])) {
                         <tr>
                             <td>
                                 <!-- <input type="text" name="id_u" placeholder="ID użytkownika" value="<?php echo $row['id_u'] ?>"> -->
-                                <input type="text" name="id_u" placeholder="ID użytkownika" value="<?php echo isset($row['id_u']) ? $row['id_u'] : '' ?>">
+                                <input type="text" name="id_u" placeholder="ID użytkownika" value="<?php echo isset($row['id_u']) ? $row['id_u'] : '' ?>" required>
                             </td>
                             <td></td>
                             <td></td>
                             <td>
-                                <input type="text" name="producent" placeholder="Producent" value="<?php echo $row['producent'] ?>">
+                                <input type="text" name="producent" placeholder="Producent" value="<?php echo $row['producent'] ?>" required>
                             </td>
                             <td>
-                                <input type="text" name="model" placeholder="Model" value="<?php echo $row['model'] ?>">
+                                <input type="text" name="model" placeholder="Model" value="<?php echo $row['model'] ?>" required>
                             </td>
                             <td>
-                                <input type="text" name="nr_seryjny_w" placeholder="Numer seryjny" value="<?php echo $row['nr_seryjny_w'] ?>">
+                                <input type="text" name="nr_seryjny_w" placeholder="Numer seryjny" value="<?php echo $row['nr_seryjny_w'] ?>" required>
                             </td>
                         </tr>
                         <tr>

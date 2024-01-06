@@ -7,11 +7,15 @@ $id = $_GET['id'];
 $id_u = $_GET['id_u'];
 if (isset($_POST['submit'])) {
     #ZAPISUJEMY DANE Z FORMULARZA DO ZMIENNYCH
-    $id = $_POST['id'];
     $id_u = $_POST['id_u'];
     $producent = $_POST['producent'];
     $model = $_POST['model'];
     $nr_seryjny_k = $_POST['nr_seryjny_k'];
+    # -----------ZAPISUJEMY WARTOŚĆ KOLUMNY NR_SERYJNY_K Z TABELI UZYTKOWNICY---------------
+    $sql_save_nr_seryjny_k = "SELECT nr_seryjny_k FROM `uzytkownicy` WHERE id=$id_u";
+    $result_save_nr_seryjny_k = mysqli_query($conn, $sql_save_nr_seryjny_k);
+    $row_save_nr_seryjny_k = mysqli_fetch_assoc($result_save_nr_seryjny_k);
+    $saved_nr_seryjny_k = $row_save_nr_seryjny_k['nr_seryjny_k'];
     #-----------ZAPISUJEMY DO ZMIENNYCH ZAPYTANIA SQL------------------#
     $sql_u_name = "SELECT imie FROM `uzytkownicy` WHERE id=$id_u;";
     $sql_u_surname = "SELECT nazwisko FROM `uzytkownicy` WHERE id=$id_u;";
@@ -26,8 +30,10 @@ if (isset($_POST['submit'])) {
         $u_surname = $row['nazwisko'];
     }
     #-----------ZAPISUJEMY DO ZMIENNYCH ZAPYTANIA SQL------------------#
-    $sql = "UPDATE `komputery` SET `imie`='$u_name',`nazwisko`='$u_surname',`producent`='$producent',`model`='$model',`nr_seryjny_k`='$nr_seryjny_k', `id_u`=$id_u WHERE id_u=$id_u";
+    $sql = "UPDATE `komputery` SET `imie`='$u_name',`nazwisko`='$u_surname',`producent`='$producent',`model`='$model',`nr_seryjny_k`='$nr_seryjny_k', `id_u`=$id_u WHERE id=$id";
     $sql2 = "UPDATE `uzytkownicy` SET `nr_seryjny_k`='$nr_seryjny_k' WHERE id=$id_u;";
+    $sql3 = "UPDATE `komputery` SET `imie`='Nieprzypisany', `nazwisko`='Nieprzypisany', `id_u`=0 WHERE `nr_seryjny_k`='$saved_nr_seryjny_k'";
+
     #-------------WYKONUJEMY ZAPYTANIA SQL-----------------#
     $result = mysqli_query($conn, $sql);
     if ($result) {
@@ -35,9 +41,16 @@ if (isset($_POST['submit'])) {
     } else {
         echo "Błąd:" . mysqli_error($conn);
     }
-    #-------------WYKONUJEMY ZAPYTANIA SQL-----------------#
-    $result2 = mysqli_query($conn, $sql2);
+
+    $result2 = mysqli_query($conn, $sql3);
     if ($result2) {
+        echo "Procedura wykonana poprawnie";
+    } else {
+        echo "Błąd:" . mysqli_error($conn);
+    }
+
+    $result3 = mysqli_query($conn, $sql2);
+    if ($result3) {
         echo "Procedura wykonana poprawnie";
     } else {
         echo "Błąd:" . mysqli_error($conn);
@@ -152,17 +165,17 @@ if (isset($_POST['submit'])) {
                     <div class="row">
                         <tfoot>
                             <tr>
-                                <td><input type="text" name="id_u" value="<?php echo $row['id_u'] ?>"></td>
+                                <td><input type="text" name="id_u" value="<?php echo $row['id_u'] ?>" required></td>
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <input type="text" name="producent" value="<?php echo $row['producent'] ?>">
+                                    <input type="text" name="producent" value="<?php echo $row['producent'] ?>" required>
                                 </td>
                                 <td>
-                                    <input type="text" name="model" value="<?php echo $row['model'] ?>">
+                                    <input type="text" name="model" value="<?php echo $row['model'] ?>" required>
                                 </td>
                                 <td>
-                                    <input type="text" name="nr_seryjny_k" value="<?php echo $row['nr_seryjny_k'] ?>">
+                                    <input type="text" name="nr_seryjny_k" value="<?php echo $row['nr_seryjny_k'] ?>" required>
                                 </td>
                                 <td><button type="submit" name="submit">Uaktualnij</button></td>
                             </tr>

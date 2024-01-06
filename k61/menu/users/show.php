@@ -116,6 +116,7 @@ if(isset($_POST['submit'])){
                     <?php
                     include "../db_conn.php";
                     $connect = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
+                    mysqli_set_charset($connect, "utf8");
                     if (mysqli_connect_errno()) {
                         echo "Błąd połączenia z bazą";
                     }
@@ -154,11 +155,11 @@ if(isset($_POST['submit'])){
                         <tr>
                             <td></td>
                             <td>
-                                <input type="text" name="imie" placeholder="Imię" value="<?php echo $row['imie'] ?>">
+                                <input type="text" name="imie" placeholder="Imię" value="<?php echo $row['imie'] ?>" required>
                             </td>
                             <td>
                                 <input type="text" name="nazwisko" placeholder="Nazwisko"
-                                    value="<?php echo $row['nazwisko'] ?>">
+                                    value="<?php echo $row['nazwisko'] ?>" required>
                             </td>
                             <td><button type="submit" name="submit">Dodaj</button></td>
                         </tr>

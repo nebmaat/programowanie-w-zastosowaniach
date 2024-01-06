@@ -6,10 +6,14 @@ include "../db_conn.php";
 $id = $_GET['id'];
 $id_u = $_GET['id_u'];
 if (isset($_POST['submit'])) {
-    $id = $_POST['id'];
     $mysz = $_POST['mysz'];
     $id_u = $_POST['id_u'];
     $klawiatura = $_POST['klawiatura'];
+    # -----------ZAPISUJEMY WARTOŚĆ KOLUMNY klawiatura Z TABELI UZYTKOWNICY---------------
+    $sql_save_klawiatura = "SELECT klawiatura FROM `uzytkownicy` WHERE id=$id_u";
+    $result_save_klawiatura = mysqli_query($conn, $sql_save_klawiatura);
+    $row_save_klawiatura = mysqli_fetch_assoc($result_save_klawiatura);
+    $saved_klawiatura = $row_save_klawiatura['klawiatura'];
     #------------------------------#
     $sql_u_name = "SELECT imie FROM `uzytkownicy` WHERE id=$id_u;";
     $sql_u_surname = "SELECT nazwisko FROM `uzytkownicy` WHERE id=$id_u;";
@@ -23,16 +27,23 @@ if (isset($_POST['submit'])) {
     while ($row = mysqli_fetch_assoc($zapytanie_u_surname)) {
         $u_surname = $row['nazwisko'];
     }
-    $sql = "UPDATE `peryferia` SET peryferia.id_u='$id_u', peryferia.imie='$u_name', peryferia.nazwisko='$u_surname', peryferia.mysz='$mysz', peryferia.klawiatura='$klawiatura' WHERE id_u=$id_u;";
+    $sql = "UPDATE `peryferia` SET peryferia.id_u='$id_u', peryferia.imie='$u_name', peryferia.nazwisko='$u_surname', peryferia.mysz='$mysz', peryferia.klawiatura='$klawiatura' WHERE id=$id";
     $sql2 = "UPDATE `uzytkownicy` SET `mysz`='$mysz',`klawiatura`='$klawiatura' WHERE id=$id_u;";
+    $sql3 = "UPDATE `peryferia` SET `imie`='Nieprzypisany', `nazwisko`='Nieprzypisany', `id_u`=0 WHERE `klawiatura`='$saved_klawiatura'";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         echo "Procedura wykonana poprawnie";
     } else {
         echo "Błąd:" . mysqli_error($conn);
     }
-    $result2 = mysqli_query($conn, $sql2);
+    $result2 = mysqli_query($conn, $sql3);
     if ($result2) {
+        echo "Procedura wykonana poprawnie";
+    } else {
+        echo "Błąd:" . mysqli_error($conn);
+    }
+    $result3 = mysqli_query($conn, $sql2);
+    if ($result3) {
         echo "Procedura wykonana poprawnie";
     } else {
         echo "Błąd:" . mysqli_error($conn);
