@@ -108,27 +108,38 @@ checkUserRole('admin');
     <div id="strona">
         <div id="header">Zmiana roli użytkownika</div>
         <div id="main">
-            <form action="" method="post">
-                <label for="selected_user">Wybierz użytkownika:</label>
-                <select name="selected_user" id="selected_user">
-                    <?php
-                    while ($user = mysqli_fetch_assoc($userListResult)) {
-                        $selected = ($user['u_id'] == $selectedUserId) ? 'selected' : '';
-                        echo "<option value=\"{$user['u_id']}\" $selected>{$user['u_name']} - {$user['u_role']}</option>";
-                    }
-                    ?>
-                </select>
-                <br>
-                <label for="new_role">Nowa rola:</label>
-                <select name="new_role" id="new_role">
-                    <option value="admin">Admin</option>
-                    <option value="mode">Mode</option>
-                    <option value="user">User</option>
-                </select>
-                <br>
-                <input type="submit" value="Zmień rolę" name="submit">
-            </form>
-        </div>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <td><label for="selected_user">Wybierz użytkownika:</label></td>
+                <td>
+                    <select name="selected_user" id="selected_user">
+                        <?php
+                        while ($user = mysqli_fetch_assoc($userListResult)) {
+                            $selected = ($user['u_id'] == $selectedUserId) ? 'selected' : '';
+                            echo "<option value=\"{$user['u_id']}\" $selected>{$user['u_name']} - {$user['u_role']}</option>";
+                        }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="new_role">Nowa rola:</label></td>
+                <td>
+                    <select name="new_role" id="new_role">
+                        <option value="admin">Admin</option>
+                        <option value="mode">Mode</option>
+                        <option value="user">User</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Zmień rolę" name="submit"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
         <div id="footer">
             <!-- STOPKA -->
         </div>
